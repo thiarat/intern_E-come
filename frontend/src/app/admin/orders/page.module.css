@@ -1,0 +1,76 @@
+.container {
+  padding: 2rem;
+  color: #0F172A;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.tableWrapper {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.table th {
+  background: #F8FAFC;
+  font-weight: 600;
+  color: #475569;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.pay-TRANSFER { background: #EFF6FF; color: #1D4ED8; }
+.pay-COD { background: #F1F5F9; color: #475569; }
+
+.status-PENDING { background: #FFFBEB; color: #D97706; }
+.status-SHIPPED { background: #ECFDF5; color: #059669; }
+
+.actionBtn, .actionBtnSecondary {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.actionBtn {
+  background: var(--primary);
+  color: white;
+}
+.actionBtn:hover { background: #2563EB; }
+
+.actionBtnSecondary {
+  background: white;
+  border: 1px solid #CBD5E1;
+  color: #0F172A;
+}
+.actionBtnSecondary:hover { background: #F8FAFC; }

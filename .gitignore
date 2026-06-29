@@ -1,3 +1,10 @@
+# folder
+.agents/
+docs/
 node_modules/
+dist/
+
+# files
+CONTEXT.md
+PRODUCTION_ROADMAP.md
 .env
-.DS_Store

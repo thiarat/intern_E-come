@@ -1,0 +1,223 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.bannerSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.mainBanner {
+  flex: 2;
+  background: var(--primary-gradient);
+  color: white;
+  border-radius: 8px;
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 71, 255, 0.2);
+}
+.mainBanner::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  border-radius: 50%;
+}
+.mainBanner h2 { 
+  font-size: 3.5rem; 
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  z-index: 1;
+}
+.mainBanner p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.sideBanners {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.sideBanner1, .sideBanner2 {
+  flex: 1;
+  background: #1E293B; /* Slate 800 */
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.sideBanner1:hover, .sideBanner2:hover {
+  transform: translateY(-4px);
+}
+.sideBanner1 { 
+  background: linear-gradient(135deg, #0F172A, #1E293B); 
+  border: 1px solid #334155;
+}
+.sideBanner2 { 
+  background: linear-gradient(135deg, #0F172A, #3B82F6); 
+}
+
+.categorySection {
+  background: white;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+.catBox {
+  flex: 0 0 100px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #475569; /* Slate 600 */
+  transition: all 0.2s ease;
+}
+.catBox span {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease;
+}
+.catBox:hover { 
+  color: var(--primary); 
+}
+.catBox:hover span {
+  transform: scale(1.1);
+}
+
+.sectionHeader {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.sectionHeader h2 {
+  font-size: 1.8rem;
+  color: #0F172A;
+  margin: 0;
+  letter-spacing: -0.5px;
+  font-weight: 800;
+}
+.sectionHeader::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #E2E8F0;
+  margin-left: 1rem;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.productCard {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.productCard:hover {
+  border-color: var(--primary);
+  box-shadow: 0 10px 25px -5px rgba(0, 71, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.productImg {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.productImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.productCard:hover .productImg img {
+  transform: scale(1.05);
+}
+.noImg { 
+  color: #94A3B8; 
+  font-weight: 500;
+}
+
+.productInfo {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.productName {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  height: 2.8rem;
+}
+
+.productFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.price {
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.sold {
+  font-size: 0.8rem;
+  color: #64748B;
+  background: #F1F5F9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #64748B;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
