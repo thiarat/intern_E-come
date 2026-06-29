@@ -1,6 +1,11 @@
+import { Prisma } from '@prisma/client';
 import { Response } from 'express';
 import prisma from '../prisma';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
+
+type OrderWithUser = Prisma.OrderGetPayload<{
+  include: { user: { select: { name: true } } }
+}>;
 
 export const getDashboardStats = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
@@ -33,7 +38,7 @@ export const getDashboardStats = async (req: AuthenticatedRequest, res: Response
       activeOrders: activeOrdersCount,
       totalUsers: totalUsersCount,
       totalProducts: totalProductsCount,
-      recentOrders: recentOrders.map(o => ({
+      recentOrders: recentOrders.map((o: OrderWithUser) => ({
         id: o.id,
         customer: o.user.name,
         createdAt: o.createdAt,
