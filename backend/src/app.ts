@@ -4,16 +4,17 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
+import authRoutes from './routes/auth.routes';
+import productRoutes from './routes/product.routes';
+import orderRoutes from './routes/order.routes';
+import reviewRoutes from './routes/review.routes';
+import wishlistRoutes from './routes/wishlist.routes';
+import userRoutes from './routes/user.routes';
+import uploadRoutes from './routes/upload.routes';
+import adminRoutes from './routes/admin.routes';
+import categoryRoutes from './routes/category.routes';
 
 dotenv.config();
-
-// Validate critical env variables on startup
-if (process.env.NODE_ENV === 'production') {
-  if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required in production');
-  if (!process.env.JWT_SECRET || process.env.JWT_SECRET === 'secret') {
-    throw new Error('JWT_SECRET must be set to a secure key in production');
-  }
-}
 
 const app = express();
 
@@ -25,23 +26,24 @@ const allowedOrigins = [
   'http://localhost:3000',
   process.env.FRONTEND_URL
 ].filter(Boolean) as string[];
+
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app') || /^https:\/\/.*\.vercel\.app$/.test(origin)) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1 || /^https:\/\/.*\.vercel\.app$/.test(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true // Allow cookies
+  credentials: true
 }));
 
 // Rate Limiter to prevent Brute Force/DDoS
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
   message: { error: 'Too many requests, please try again later.' }
 });
 app.use('/api', limiter);
@@ -51,19 +53,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'E-Commerce Delivery Platform API is running' });
+  res.json({
+    message: 'E-Commerce Delivery Platform API is running',
+    env: {
+      database: process.env.DATABASE_URL ? '✓ connected' : '✗ missing DATABASE_URL',
+      jwt: process.env.JWT_SECRET ? '✓ set' : '✗ missing JWT_SECRET',
+      node_env: process.env.NODE_ENV || 'not set'
+    }
+  });
 });
-
-// Import routes here later
-import authRoutes from './routes/auth.routes';
-import productRoutes from './routes/product.routes';
-import orderRoutes from './routes/order.routes';
-import reviewRoutes from './routes/review.routes';
-import wishlistRoutes from './routes/wishlist.routes';
-import userRoutes from './routes/user.routes';
-import uploadRoutes from './routes/upload.routes';
-import adminRoutes from './routes/admin.routes';
-import categoryRoutes from './routes/category.routes';
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
