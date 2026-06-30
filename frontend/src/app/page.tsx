@@ -11,9 +11,19 @@ export default function Home() {
 
   useEffect(() => {
     api('/api/products')
-      .then(res => res.json())
-      .then(data => { setProducts(data); setLoading(false); })
-      .catch(err => { console.error(err); setLoading(false); });
+      .then(async res => {
+        if (!res.ok) {
+          throw new Error(`API error: ${res.status}`);
+        }
+        const data = await res.json();
+        setProducts(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch products:', err);
+        setProducts([]);
+        setLoading(false);
+      });
   }, []);
 
   return (

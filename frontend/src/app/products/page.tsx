@@ -30,7 +30,9 @@ function ProductsContent() {
         const res = await api(url);
         if (res.ok) {
           const data = await res.json();
-          setProducts(data);
+          setProducts(Array.isArray(data) ? data : []);
+        } else {
+          setProducts([]);
         }
       } catch (error) {
         console.error('Failed to fetch products', error);
