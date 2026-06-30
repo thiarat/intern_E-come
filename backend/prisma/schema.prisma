@@ -4,6 +4,8 @@ generator client {
   output        = "../src/generated/client"
 }
 
+// DATABASE_URL  → Supabase Transaction Pooler (port 6543) with ?pgbouncer=true  — used at runtime by Vercel serverless
+// DIRECT_URL    → Supabase Direct Connection  (port 5432)                        — used only for prisma migrate / prisma db push
 datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
