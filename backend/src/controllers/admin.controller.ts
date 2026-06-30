@@ -3,10 +3,6 @@ import { Response } from 'express';
 import prisma from '../prisma';
 import { AuthenticatedRequest } from '../middlewares/auth.middleware';
 
-type OrderWithUser = Prisma.OrderGetPayload<{
-  include: { user: { select: { name: true } } }
-}>;
-
 export const getDashboardStats = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const [totalSalesData, activeOrdersCount, totalUsersCount, totalProductsCount, recentOrders] = await Promise.all([
@@ -38,9 +34,9 @@ export const getDashboardStats = async (req: AuthenticatedRequest, res: Response
       activeOrders: activeOrdersCount,
       totalUsers: totalUsersCount,
       totalProducts: totalProductsCount,
-      recentOrders: recentOrders.map((o: OrderWithUser) => ({
+      recentOrders: recentOrders.map((o) => ({
         id: o.id,
-        customer: o.user.name,
+        customer: o.user?.name || 'Unknown',
         createdAt: o.createdAt,
         status: o.status,
         total: o.totalAmount
