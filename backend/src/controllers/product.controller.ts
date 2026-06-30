@@ -31,7 +31,7 @@ export const getAllProducts = async (req: Request, res: Response): Promise<void>
     res.status(200).json(products);
   } catch (error: any) {
     console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error', detail: error?.message, code: error?.code });
   }
 };
 
