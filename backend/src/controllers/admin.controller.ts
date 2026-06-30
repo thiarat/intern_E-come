@@ -34,7 +34,7 @@ export const getDashboardStats = async (req: AuthenticatedRequest, res: Response
       activeOrders: activeOrdersCount,
       totalUsers: totalUsersCount,
       totalProducts: totalProductsCount,
-      recentOrders: recentOrders.map((o) => ({
+      recentOrders: recentOrders.map((o: any) => ({
         id: o.id,
         customer: o.user?.name || 'Unknown',
         createdAt: o.createdAt,
